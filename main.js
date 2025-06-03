@@ -47,8 +47,7 @@ function convertNumberToWords(num) {
     "Eighty",
     "Ninety"
   ];
-  if ((num = num.toString()).length > 9)
-    return "Overflow: Maximum 9 digits supported";
+  if ((num = num.toString()).length > 9) return "Overflow: You too rich";
   n = ("000000000" + num)
     .substr(-9)
     .match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
@@ -90,14 +89,14 @@ document.addEventListener("DOMContentLoaded", function () {
   input.addEventListener("input", function () {
     const val = input.value;
     if (val === "") {
-      resultNodeUSD.textContent = "Please enter a decimal number.";
+      resultNodeUSD.textContent = "Please enter a number.";
       return;
     }
     const result = convertNumber(val);
     const resultInWords = convertNumberToWords(val);
 
-    resultNodeUSD.textContent = `The number in USD ${result.numberInIntlFormat}.`;
-    resultNodeNPR.textContent = `The number in ${result.numberInNepalFormat}.`;
-    resultNodeNPRWords.textContent = `In words: ${resultInWords}.`;
+    resultNodeUSD.textContent = result.numberInIntlFormat;
+    resultNodeNPR.textContent = result.numberInNepalFormat;
+    resultNodeNPRWords.textContent = resultInWords;
   });
 });
